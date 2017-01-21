@@ -80,3 +80,45 @@ Step 3: Define route for Swagger
 // Generates swagger.json to /api/v1/swagger.json
 APIV1.addSwagger('swagger.json');
 ```
+
+
+## Additional Features
+
+In v0.3 there is now the ability to define swaggers paths outside of routes. This means you can now do two additional things:
+ - Write swagger login and logout routes when default auth is used.
+ - Have swagger route information written seperately from restivus routes.
+ 
+In the main swagger object you would do the following:
+
+```
+APIV1.swagger.meta = {
+    swagger: "2.0",
+    info: {
+    ....
+    },
+    paths:{
+        '/route-goes-here/': {
+            "post": {
+                "description": "My New Route",
+                "parameters": [{
+                    "name": "test route",
+                    "in": "body",
+                    "description": "This is a post route to post things.",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/yourSchemaDefinition"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Returns what this route should return."
+                    }
+                }
+            },
+            "get":{
+            ...
+            }
+        }
+    }
+}
+```
