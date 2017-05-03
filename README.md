@@ -122,3 +122,72 @@ APIV1.swagger.meta = {
     }
 }
 ```
+
+In v0.3.2 you can hide routes by adding the option "hidden". See example:
+
+```
+APIV1.addRoute('internalHiddenFromSwagger',
+    {hidden:true},
+    {
+        post: {
+            swagger: {
+            // not required
+            },
+            action: function(){
+            //do stuff for this route here
+            }
+        }    
+    }
+    
+```  
+
+## Additional Examples
+
+A brief example of how to generate security definitions for your swagger file:
+
+```
+APIV1.swagger = {
+  meta: {
+    swagger: "2.0",
+    info: {
+      version: "1.0.0",
+      title: "My API",
+      description: "My REST API",
+      termsOfService: "https://example.com/terms/",
+      contact: {
+        name: "Example team"
+      },
+      license: {
+        name: "MIT"
+      }
+    }
+  securityDefinitions: {
+    userSecurityToken : {
+      type: "apiKey",
+      in: "header",
+      name: "auth-token"
+    },
+    userId : {
+      type: "apiKey",
+      in: "header",
+      name: "user-id"
+    },
+  },
+  security : [
+    {
+     userSecurityToken: [],
+     userId: []
+    }
+  ]
+```
+
+With this example you will require both tokens to use any routes defined in your swagger generated file for APIV1. To require one or the other you modify the security properties as such:
+
+ 
+```
+  security : [
+    {userSecurityToken: []},
+    {userId: []}
+  ]
+
+```
