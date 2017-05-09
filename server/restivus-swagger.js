@@ -42,10 +42,11 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
         // Loop through all routes
         let paths = {};
         _.each(restivus._routes, function(route) {
-          // Exclude swagger, login, logout and users paths
+          // Exclude swagger, login, logout, users paths, and routes with option hidden set to any truthy value
           if(route.path !== swaggerPath &&
             route.path !== 'login' &&
             route.path !== 'logout' &&
+            !route.options.hidden &&
             !route.path.includes('users') )
           {
             // Modify path parameter to swagger spec style
