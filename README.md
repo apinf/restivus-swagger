@@ -146,21 +146,20 @@ APIV1.addRoute('internalHiddenFromSwagger',
 A brief example of how to generate security definitions for your swagger file:
 
 ```
-APIV1.swagger = {
-  meta: {
-    swagger: "2.0",
-    info: {
-      version: "1.0.0",
-      title: "My API",
-      description: "My REST API",
-      termsOfService: "https://example.com/terms/",
-      contact: {
-        name: "Example team"
-      },
-      license: {
-        name: "MIT"
-      }
+APIV1.swagger.meta = {
+  swagger: "2.0",
+  info: {
+    version: "1.0.0",
+    title: "My API",
+    description: "My REST API",
+    termsOfService: "https://example.com/terms/",
+    contact: {
+      name: "Example team"
+    },
+    license: {
+      name: "MIT"
     }
+  },
   securityDefinitions: {
     userSecurityToken : {
       type: "apiKey",
@@ -179,6 +178,7 @@ APIV1.swagger = {
      userId: []
     }
   ]
+}
 ```
 
 With this example you will require both tokens to use any routes defined in your swagger generated file for APIV1. To require one or the other you modify the security properties as such:
