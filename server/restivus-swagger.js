@@ -85,15 +85,15 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
           doc.definitions = swagger.definitions;
         }
           
-        // Check swagger meta for additional paths
-        if(swagger.meta.paths !== undefined){
-          for (let path in swagger.meta.paths){
+        // Check swagger main object for additional paths
+        if(swagger.paths){
+          for (let path in swagger.paths){
             // Skip paths if already defined within route
             for (let routePath in doc.paths){
               if (routePath === path){
                 continue;
               } else {
-                doc.paths[path] = swagger.meta.paths[path];
+                doc.paths[path] = swagger.paths[path];
               }
             }
           }
