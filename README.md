@@ -1,4 +1,4 @@
-## Restivus Swagger plugin
+# Restivus Swagger (OpenAPI Specification) plugin
 
 Generate swagger.json for your Restivus API
 
@@ -35,7 +35,7 @@ APIV1.swagger = {
   },
   params: {
     // Parameter object definitions to be used in endpoint configurations
-    // Path and body parameter types supported in v0.2.0 
+    // Path and body parameter types supported in v0.2.0
     petId: {
       name: "id",
       in: "path",
@@ -82,12 +82,12 @@ APIV1.addSwagger('swagger.json');
 ```
 
 
-## Additional Features
+## Define paths outside of routes
 
-In v0.3 there is now the ability to define swaggers paths outside of routes. This means you can now do two additional things:
- - Write swagger login and logout routes when default auth is used.
- - Have swagger route information written seperately from restivus routes.
- 
+You can define swagger paths outside of routes. This means you can now do two additional things:
+ - Write swagger login and logout routes when default authentication is used.
+ - Have swagger route information written separately from Restivus routes.
+
 In the main swagger object you would do the following:
 
 ```
@@ -123,7 +123,8 @@ APIV1.swagger.meta = {
 }
 ```
 
-In v0.3.2 you can hide routes by adding the option "hidden". See example:
+## Hidden routes
+You can hide routes by adding the option "hidden". See example:
 
 ```
 APIV1.addRoute('internalHiddenFromSwagger',
@@ -138,29 +139,28 @@ APIV1.addRoute('internalHiddenFromSwagger',
             }
         }    
     }
-    
+
 ```  
 
-## Additional Examples
+## Security definitions
 
 A brief example of how to generate security definitions for your swagger file:
 
 ```
-APIV1.swagger = {
-  meta: {
-    swagger: "2.0",
-    info: {
-      version: "1.0.0",
-      title: "My API",
-      description: "My REST API",
-      termsOfService: "https://example.com/terms/",
-      contact: {
-        name: "Example team"
-      },
-      license: {
-        name: "MIT"
-      }
+APIV1.swagger.meta = {
+  swagger: "2.0",
+  info: {
+    version: "1.0.0",
+    title: "My API",
+    description: "My REST API",
+    termsOfService: "https://example.com/terms/",
+    contact: {
+      name: "Example team"
+    },
+    license: {
+      name: "MIT"
     }
+  },
   securityDefinitions: {
     userSecurityToken : {
       type: "apiKey",
@@ -179,11 +179,12 @@ APIV1.swagger = {
      userId: []
     }
   ]
+}
 ```
 
 With this example you will require both tokens to use any routes defined in your swagger generated file for APIV1. To require one or the other you modify the security properties as such:
 
- 
+
 ```
   security : [
     {userSecurityToken: []},
