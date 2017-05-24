@@ -77,6 +77,11 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
           }
         });
 
+        // Add security definitions
+        if(swagger.securityDefinitions !== undefined) {
+          doc.securityDefinitions = swagger.securityDefinitions;
+        }
+
         // Add paths to Swagger doc
         doc.paths = paths;
 
@@ -84,7 +89,7 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
         if(swagger.definitions !== undefined) {
           doc.definitions = swagger.definitions;
         }
-          
+
         // Check swagger meta for additional paths
         if(swagger.meta.paths !== undefined){
           for (let path in swagger.meta.paths){
@@ -98,9 +103,7 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
             }
           }
         }
-          
-          
-          
+
         // Return swagger.json
         return doc;
       }
