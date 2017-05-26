@@ -14,7 +14,7 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
   restivus.addRoute(swaggerPath, {authRequired: false}, {
     get: function () {
       // Check if swagger configuration exists
-      if(swagger === undefined ||
+      if (swagger === undefined ||
         swagger.meta === undefined) {
           return {"error": "Swagger configuration not given for Restivus."};
         }
@@ -27,7 +27,7 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
         _.extend(doc, swagger.meta);
 
         // If host, basePath and schemes are not given in meta, autodetect
-        if( !('host' in swagger.meta) &&
+        if ( !('host' in swagger.meta) &&
         !('basePath' in swagger.meta) &&
         !('schemes' in swagger.meta)) {
           // Get host info
@@ -43,7 +43,7 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
         let paths = {};
         _.each(restivus._routes, function(route) {
           // Exclude swagger, login, logout, users paths, and routes with option hidden set to any truthy value
-          if(route.path !== swaggerPath &&
+          if (route.path !== swaggerPath &&
             route.path !== 'login' &&
             route.path !== 'logout' &&
             !route.options.hidden &&
@@ -70,7 +70,7 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
               let currentEndpoint = route.endpoints[endpoint];
 
               // Add swagger metadata if it exists in endpoint config
-              if(currentEndpoint.swagger !== undefined) {
+              if (currentEndpoint.swagger !== undefined) {
                 currentPath[endpoint] = currentEndpoint.swagger;
               }
             });
@@ -81,19 +81,19 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
         doc.paths = paths;
 
         // Add definitions
-        if(swagger.definitions !== undefined) {
+        if (swagger.definitions !== undefined) {
           doc.definitions = swagger.definitions;
         }
           
-        // Check swagger meta for additional paths
-        if(swagger.meta.paths !== undefined){
-          for (let path in swagger.meta.paths){
+        // Check swagger main object for additional paths
+        if (swagger.paths) {
+          for (let path in swagger.paths) {
             // Skip paths if already defined within route
-            for (let routePath in doc.paths){
-              if (routePath === path){
+            for (let routePath in doc.paths) {
+              if (routePath === path) {
                 continue;
               } else {
-                doc.paths[path] = swagger.meta.paths[path];
+                doc.paths[path] = swagger.paths[path];
               }
             }
           }

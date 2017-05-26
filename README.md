@@ -91,11 +91,7 @@ You can define swagger paths outside of routes. This means you can now do two ad
 In the main swagger object you would do the following:
 
 ```
-APIV1.swagger.meta = {
-    swagger: "2.0",
-    info: {
-    ....
-    },
+APIV1.swagger = {
     paths:{
         '/route-goes-here/': {
             "post": {
