@@ -46,8 +46,7 @@ Restivus.prototype.addSwagger = function(swaggerPath) {
           if (route.path !== swaggerPath &&
             route.path !== 'login' &&
             route.path !== 'logout' &&
-            !route.options.hidden &&
-            !route.path.includes('users') )
+            !route.options.hidden  )
           {
             // Modify path parameter to swagger spec style
             // Replaces :param with {param}
